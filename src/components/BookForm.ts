@@ -4,7 +4,10 @@ export class BookForm {
   private containerId: string;
   private onSubmitCallback: (data: { title: string; author: string; year: number }) => void;
 
-  constructor(containerId: string, onSubmitCallback: (data: { title: string; author: string; year: number }) => void) {
+  constructor(
+    containerId: string,
+    onSubmitCallback: (data: { title: string; author: string; year: number }) => void,
+  ) {
     this.containerId = containerId;
     this.onSubmitCallback = onSubmitCallback;
   }
@@ -49,7 +52,7 @@ export class BookForm {
         isValid = false;
       }
       if (!Validation.isRequired(yearVal) || !Validation.isValidYear(yearVal)) {
-        this.showError(year.wrapper, "Введіть коректний рік (тільки цифри)");
+        this.showError(year.wrapper, 'Введіть коректний рік (тільки цифри)');
         isValid = false;
       }
 
@@ -65,13 +68,13 @@ export class BookForm {
   private createInput(type: string, placeholder: string, id: string) {
     const wrapper = document.createElement('div');
     wrapper.className = 'mb-2';
-    
+
     const input = document.createElement('input');
     input.type = type;
     input.className = 'form-control';
     input.placeholder = placeholder;
     input.id = id;
-    
+
     wrapper.appendChild(input);
     return { wrapper, input }; // Повертаємо і обгортку, і сам інпут для зручного доступу
   }
@@ -84,6 +87,6 @@ export class BookForm {
   }
 
   private clearErrors() {
-    document.querySelectorAll('.error-message').forEach(el => el.remove());
+    document.querySelectorAll('.error-message').forEach((el) => el.remove());
   }
 }

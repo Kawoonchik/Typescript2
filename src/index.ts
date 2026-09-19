@@ -29,7 +29,7 @@ document.addEventListener('DOMContentLoaded', () => {
       title: bookData.title,
       author: bookData.author,
       year: bookData.year,
-      isBorrowed: false
+      isBorrowed: false,
     };
 
     // Додаємо в логіку, зберігаємо в пам'ять і перемальовуємо UI

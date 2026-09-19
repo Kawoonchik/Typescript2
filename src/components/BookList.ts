@@ -25,7 +25,7 @@ export class BookList {
     const listGroup = document.createElement('ul');
     listGroup.className = 'list-group list-group-flush'; // Стиль Bootstrap для списків
 
-    books.forEach(book => {
+    books.forEach((book) => {
       const listItem = document.createElement('li');
       listItem.className = 'list-group-item d-flex justify-content-between align-items-center px-0';
       listItem.textContent = `${book.title} by ${book.author} (${book.year})`;
