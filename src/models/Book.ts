@@ -7,7 +7,13 @@ export class Book implements IBook {
   private _year: number;
   private _isBorrowed: boolean;
 
-  constructor(id: string, title: string, author: string, year: number, isBorrowed: boolean = false) {
+  constructor(
+    id: string,
+    title: string,
+    author: string,
+    year: number,
+    isBorrowed: boolean = false
+  ) {
     this._id = id;
     this._title = title;
     this._author = author;
@@ -15,17 +21,35 @@ export class Book implements IBook {
     this._isBorrowed = isBorrowed;
   }
 
-  get id(): string { return this._id; }
-  
-  get title(): string { return this._title; }
-  set title(value: string) { this._title = value; }
+  get id(): string {
+    return this._id;
+  }
 
-  get author(): string { return this._author; }
-  set author(value: string) { this._author = value; }
+  get title(): string {
+    return this._title;
+  }
+  set title(value: string) {
+    this._title = value;
+  }
 
-  get year(): number { return this._year; }
-  set year(value: number) { this._year = value; }
+  get author(): string {
+    return this._author;
+  }
+  set author(value: string) {
+    this._author = value;
+  }
 
-  get isBorrowed(): boolean { return this._isBorrowed; }
-  set isBorrowed(value: boolean) { this._isBorrowed = value; }
+  get year(): number {
+    return this._year;
+  }
+  set year(value: number) {
+    this._year = value;
+  }
+
+  get isBorrowed(): boolean {
+    return this._isBorrowed;
+  }
+  set isBorrowed(value: boolean) {
+    this._isBorrowed = value;
+  }
 }

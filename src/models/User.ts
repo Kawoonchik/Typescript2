@@ -13,16 +13,27 @@ export class User implements IUser {
     this._borrowedBooks = borrowedBooks;
   }
 
-  get id(): string { return this._id; }
-  
-  get name(): string { return this._name; }
-  set name(value: string) { this._name = value; }
+  get id(): string {
+    return this._id;
+  }
 
-  get email(): string { return this._email; }
-  set email(value: string) { this._email = value; }
+  get name(): string {
+    return this._name;
+  }
+  set name(value: string) {
+    this._name = value;
+  }
 
-  get borrowedBooks(): string[] { return this._borrowedBooks; }
+  get email(): string {
+    return this._email;
+  }
+  set email(value: string) {
+    this._email = value;
+  }
 
+  get borrowedBooks(): string[] {
+    return this._borrowedBooks;
+  }
 
   borrowBook(bookId: string): void {
     if (this._borrowedBooks.length < 3) {
@@ -31,6 +42,6 @@ export class User implements IUser {
   }
 
   returnBook(bookId: string): void {
-    this._borrowedBooks = this._borrowedBooks.filter(id => id !== bookId);
+    this._borrowedBooks = this._borrowedBooks.filter((id) => id !== bookId);
   }
 }

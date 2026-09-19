@@ -3,8 +3,8 @@ export class NotificationService {
     // Пізніше ми реалізуємо тут логіку створення DOM-елемента модального вікна
     console.log(`Модальне вікно: ${message}`);
     if (onConfirm) {
-        // Імітація підтвердження
-        onConfirm();
+      // Імітація підтвердження
+      onConfirm();
     }
   }
 }

@@ -31,7 +31,7 @@ export class BookForm {
 
     // Додаємо елементи до форми
     form.append(titleInput, authorInput, yearInput, submitBtn);
-    
+
     // Обробник сабміту (поки що лише заглушка, логіку валідації додамо пізніше)
     form.addEventListener('submit', (e: Event) => {
       e.preventDefault();

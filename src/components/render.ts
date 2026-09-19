@@ -25,7 +25,7 @@ export function renderAppLayout(): void {
     bookListContainer,
     userListContainer
   );
-  
+
   appContainer.appendChild(container);
 }
 
@@ -34,10 +34,10 @@ function createSectionContainer(id: string): HTMLDivElement {
   const wrapper = document.createElement('div');
   wrapper.className = 'card mb-3 shadow-sm';
   wrapper.id = id;
-  
+
   const body = document.createElement('div');
   body.className = 'card-body';
   wrapper.appendChild(body);
-  
+
   return wrapper;
 }
