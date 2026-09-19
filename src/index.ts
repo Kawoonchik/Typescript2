@@ -29,13 +29,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // 4. Ініціалізуємо списки (UI)
   const userList = new UserList('user-list-container');
-  
+
   const bookList = new BookList(
     'book-list-container',
     (bookId: string) => {
       const book = bookLibrary.findById(bookId);
       const users = userLibrary.getAll();
-      
+
       if (book) {
         BorrowModal.render(users, (userId: string) => {
           const user = userLibrary.findById(userId);
@@ -57,7 +57,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const book = bookLibrary.findById(bookId);
       if (book) {
         book.isBorrowed = false;
-        
+
         const users = userLibrary.getAll();
         const user = users.find((u: IUser) => u.borrowedBooks?.includes(bookId));
         if (user && user.borrowedBooks) {
@@ -70,7 +70,7 @@ document.addEventListener('DOMContentLoaded', () => {
         userList.render(userLibrary.getAll());
         NotificationService.show(`Книгу "${book.title}" успішно повернуто`);
       }
-    }
+    },
   );
 
   // 5. Первинний рендер списків
@@ -84,7 +84,7 @@ document.addEventListener('DOMContentLoaded', () => {
       title: bookData.title,
       author: bookData.author,
       year: bookData.year,
-      isBorrowed: false
+      isBorrowed: false,
     };
     bookLibrary.add(newBook);
     Storage.save(BOOKS_STORAGE_KEY, bookLibrary.getAll());
@@ -98,7 +98,7 @@ document.addEventListener('DOMContentLoaded', () => {
       id: generateId(),
       name: userData.name,
       email: userData.email,
-      borrowedBooks: []
+      borrowedBooks: [],
     };
     userLibrary.add(newUser);
     Storage.save(USERS_STORAGE_KEY, userLibrary.getAll());

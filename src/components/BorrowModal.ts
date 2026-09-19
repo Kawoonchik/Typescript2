@@ -3,7 +3,8 @@ import { IUser } from '../models/interfaces/IUser';
 export class BorrowModal {
   static render(users: IUser[], onConfirm: (userId: string) => void) {
     const overlay = document.createElement('div');
-    overlay.style.cssText = 'position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.5);display:flex;align-items:center;justify-content:center;z-index:1000;';
+    overlay.style.cssText =
+      'position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.5);display:flex;align-items:center;justify-content:center;z-index:1000;';
 
     const modal = document.createElement('div');
     modal.className = 'bg-white p-4 rounded shadow';
@@ -16,7 +17,7 @@ export class BorrowModal {
     if (users.length === 0) {
       select.innerHTML = '<option disabled selected>Немає зареєстрованих користувачів</option>';
     } else {
-      users.forEach(u => {
+      users.forEach((u) => {
         const opt = document.createElement('option');
         opt.value = u.id;
         opt.textContent = `${u.name} (${u.email})`;

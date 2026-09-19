@@ -5,7 +5,7 @@ export class NotificationService {
     toast.style.zIndex = '1050';
     toast.textContent = message;
     document.body.appendChild(toast);
-    
+
     // Зникає через 3 секунди
     setTimeout(() => toast.remove(), 3000);
   }
