@@ -1,58 +1,89 @@
+import { Validation } from '../utils/validators';
+
 export class BookForm {
   private containerId: string;
+  private onSubmitCallback: (data: { title: string; author: string; year: number }) => void;
 
-  constructor(containerId: string) {
+  constructor(containerId: string, onSubmitCallback: (data: { title: string; author: string; year: number }) => void) {
     this.containerId = containerId;
+    this.onSubmitCallback = onSubmitCallback;
   }
 
   render(): void {
     const container = document.querySelector(`#${this.containerId} .card-body`);
     if (!container) return;
 
-    // Заголовок форми
-    const title = document.createElement('h4');
-    title.className = 'card-title mb-3';
-    title.textContent = 'Додати Книгу';
-
-    // Форма
+    container.innerHTML = '<h4 class="card-title mb-3">Додати Книгу</h4>';
     const form = document.createElement('form');
     form.id = 'add-book-form';
 
-    // Поля форми
-    const titleInput = this.createInput('text', 'Назва книги', 'book-title');
-    const authorInput = this.createInput('text', 'Автор', 'book-author');
-    const yearInput = this.createInput('text', 'Рік видання', 'book-year');
+    // Створюємо поля і зберігаємо посилання на них
+    const title = this.createInput('text', 'Назва книги', 'book-title');
+    const author = this.createInput('text', 'Автор', 'book-author');
+    const year = this.createInput('text', 'Рік видання', 'book-year');
 
-    // Кнопка
     const submitBtn = document.createElement('button');
     submitBtn.type = 'submit';
     submitBtn.className = 'btn btn-success mt-2';
     submitBtn.textContent = 'Додати Книгу';
 
-    // Додаємо елементи до форми
-    form.append(titleInput, authorInput, yearInput, submitBtn);
+    form.append(title.wrapper, author.wrapper, year.wrapper, submitBtn);
 
-    // Обробник сабміту (поки що лише заглушка, логіку валідації додамо пізніше)
     form.addEventListener('submit', (e: Event) => {
       e.preventDefault();
-      console.log('Спроба додати книгу...');
+      this.clearErrors(); // Очищаємо старі помилки перед новою перевіркою
+
+      const titleVal = title.input.value;
+      const authorVal = author.input.value;
+      const yearVal = year.input.value;
+
+      let isValid = true;
+
+      // Валідація згідно з вимогами
+      if (!Validation.isRequired(titleVal)) {
+        this.showError(title.wrapper, "Це поле є обов'язковим");
+        isValid = false;
+      }
+      if (!Validation.isRequired(authorVal)) {
+        this.showError(author.wrapper, "Це поле є обов'язковим");
+        isValid = false;
+      }
+      if (!Validation.isRequired(yearVal) || !Validation.isValidYear(yearVal)) {
+        this.showError(year.wrapper, "Введіть коректний рік (тільки цифри)");
+        isValid = false;
+      }
+
+      if (isValid) {
+        this.onSubmitCallback({ title: titleVal, author: authorVal, year: parseInt(yearVal, 10) });
+        form.reset(); // Очищаємо форму після успішного додавання
+      }
     });
 
-    // Монтуємо в контейнер
-    container.append(title, form);
+    container.appendChild(form);
   }
 
-  private createInput(type: string, placeholder: string, id: string): HTMLDivElement {
+  private createInput(type: string, placeholder: string, id: string) {
     const wrapper = document.createElement('div');
     wrapper.className = 'mb-2';
-
+    
     const input = document.createElement('input');
     input.type = type;
     input.className = 'form-control';
     input.placeholder = placeholder;
     input.id = id;
-
+    
     wrapper.appendChild(input);
-    return wrapper;
+    return { wrapper, input }; // Повертаємо і обгортку, і сам інпут для зручного доступу
+  }
+
+  private showError(wrapper: HTMLDivElement, message: string) {
+    const errorMsg = document.createElement('div');
+    errorMsg.className = 'text-danger small mt-1 error-message';
+    errorMsg.textContent = message;
+    wrapper.appendChild(errorMsg);
+  }
+
+  private clearErrors() {
+    document.querySelectorAll('.error-message').forEach(el => el.remove());
   }
 }
