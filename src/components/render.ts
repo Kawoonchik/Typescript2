@@ -23,7 +23,7 @@ export function renderAppLayout(): void {
     bookFormContainer,
     userFormContainer,
     bookListContainer,
-    userListContainer
+    userListContainer,
   );
 
   appContainer.appendChild(container);

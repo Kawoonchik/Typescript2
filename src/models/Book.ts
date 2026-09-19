@@ -12,7 +12,7 @@ export class Book implements IBook {
     title: string,
     author: string,
     year: number,
-    isBorrowed: boolean = false
+    isBorrowed: boolean = false,
   ) {
     this._id = id;
     this._title = title;

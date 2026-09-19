@@ -6,7 +6,7 @@ export class UserForm {
 
   constructor(
     containerId: string,
-    onSubmitCallback: (data: { name: string; email: string }) => void
+    onSubmitCallback: (data: { name: string; email: string }) => void,
   ) {
     this.containerId = containerId;
     this.onSubmitCallback = onSubmitCallback;
