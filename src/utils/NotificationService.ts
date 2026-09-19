@@ -1,10 +1,12 @@
 export class NotificationService {
-  static showModal(message: string, onConfirm?: () => void): void {
-    // Пізніше ми реалізуємо тут логіку створення DOM-елемента модального вікна
-    console.log(`Модальне вікно: ${message}`);
-    if (onConfirm) {
-      // Імітація підтвердження
-      onConfirm();
-    }
+  static show(message: string) {
+    const toast = document.createElement('div');
+    toast.className = 'position-fixed bottom-0 end-0 m-3 p-3 bg-success text-white rounded shadow';
+    toast.style.zIndex = '1050';
+    toast.textContent = message;
+    document.body.appendChild(toast);
+    
+    // Зникає через 3 секунди
+    setTimeout(() => toast.remove(), 3000);
   }
 }
