@@ -1,6 +1,7 @@
 {
   "name": "typescript2",
   "version": "1.0.0",
+  "homepage": "https://kawoonchik.github.io/typescript2",
   "description": "",
   "main": "index.js",
   "directories": {
@@ -9,6 +10,8 @@
   "scripts": {
     "start": "webpack serve --mode development",
     "build": "webpack --mode production",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d dist",
     "test": "mocha -r tsx \"tests/**/*.test.ts\"",
     "lint": "eslint src/**/*.ts",
     "format": "prettier --write \"src/**/*.ts\"",
@@ -28,6 +31,7 @@
     "eslint": "^8.57.0",
     "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-prettier": "^5.5.6",
+    "gh-pages": "^6.3.0",
     "html-webpack-plugin": "^5.6.8",
     "husky": "^9.1.7",
     "lint-staged": "^17.5.1",
