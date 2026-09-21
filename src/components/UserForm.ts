@@ -56,7 +56,6 @@ export class UserForm {
     container.appendChild(form);
   }
 
-  // Ті самі допоміжні методи, що й у BookForm
   private createInput(type: string, placeholder: string, id: string) {
     const wrapper = document.createElement('div');
     wrapper.className = 'mb-2';

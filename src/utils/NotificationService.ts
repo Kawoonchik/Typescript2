@@ -6,7 +6,6 @@ export class NotificationService {
     toast.textContent = message;
     document.body.appendChild(toast);
 
-    // Зникає через 3 секунди
     setTimeout(() => toast.remove(), 3000);
   }
 }

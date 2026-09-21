@@ -20,7 +20,6 @@ export class BookForm {
     const form = document.createElement('form');
     form.id = 'add-book-form';
 
-    // Створюємо поля і зберігаємо посилання на них
     const title = this.createInput('text', 'Назва книги', 'book-title');
     const author = this.createInput('text', 'Автор', 'book-author');
     const year = this.createInput('text', 'Рік видання', 'book-year');
@@ -34,7 +33,7 @@ export class BookForm {
 
     form.addEventListener('submit', (e: Event) => {
       e.preventDefault();
-      this.clearErrors(); // Очищаємо старі помилки перед новою перевіркою
+      this.clearErrors();
 
       const titleVal = title.input.value;
       const authorVal = author.input.value;
@@ -42,7 +41,6 @@ export class BookForm {
 
       let isValid = true;
 
-      // Валідація згідно з вимогами
       if (!Validation.isRequired(titleVal)) {
         this.showError(title.wrapper, "Це поле є обов'язковим");
         isValid = false;
@@ -58,7 +56,7 @@ export class BookForm {
 
       if (isValid) {
         this.onSubmitCallback({ title: titleVal, author: authorVal, year: parseInt(yearVal, 10) });
-        form.reset(); // Очищаємо форму після успішного додавання
+        form.reset();
       }
     });
 
@@ -76,7 +74,7 @@ export class BookForm {
     input.id = id;
 
     wrapper.appendChild(input);
-    return { wrapper, input }; // Повертаємо і обгортку, і сам інпут для зручного доступу
+    return { wrapper, input };
   }
 
   private showError(wrapper: HTMLDivElement, message: string) {

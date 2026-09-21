@@ -5,7 +5,6 @@ describe('Library Service', () => {
   let library: Library<{ id: string; name: string }>;
 
   beforeEach(() => {
-    // Створюємо нову бібліотеку перед кожним тестом, щоб вони були незалежними
     library = new Library<{ id: string; name: string }>();
   });
 

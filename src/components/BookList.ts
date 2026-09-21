@@ -41,7 +41,6 @@ export class BookList {
       actionBtn.className = book.isBorrowed ? 'btn btn-warning btn-sm' : 'btn btn-primary btn-sm';
       actionBtn.textContent = book.isBorrowed ? 'Повернути' : 'Позичити';
 
-      // ДОДАЄМО ОБРОБНИК КЛІКУ
       actionBtn.addEventListener('click', () => {
         if (book.isBorrowed) {
           this.onReturn(book.id);

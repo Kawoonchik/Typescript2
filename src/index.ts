@@ -16,18 +16,14 @@ const BOOKS_STORAGE_KEY = 'library_books';
 const USERS_STORAGE_KEY = 'library_users';
 
 document.addEventListener('DOMContentLoaded', () => {
-  // 1. Будуємо базову розмітку
   renderAppLayout();
 
-  // 2. Завантажуємо дані зі Storage
   const savedBooks = Storage.load<IBook[]>(BOOKS_STORAGE_KEY) || [];
   const savedUsers = Storage.load<IUser[]>(USERS_STORAGE_KEY) || [];
 
-  // 3. Ініціалізуємо сервіси (бізнес-логіка)
   const bookLibrary = new Library<IBook>(savedBooks);
   const userLibrary = new Library<IUser>(savedUsers);
 
-  // 4. Ініціалізуємо списки (UI)
   const userList = new UserList('user-list-container');
 
   const bookList = new BookList(
@@ -73,11 +69,9 @@ document.addEventListener('DOMContentLoaded', () => {
     },
   );
 
-  // 5. Первинний рендер списків
   bookList.render(bookLibrary.getAll());
   userList.render(userLibrary.getAll());
 
-  // 6. Ініціалізуємо форми
   const bookForm = new BookForm('book-form-container', (bookData) => {
     const newBook: IBook = {
       id: generateId(),
