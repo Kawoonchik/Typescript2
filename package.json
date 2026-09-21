@@ -15,7 +15,7 @@
     "lint": "eslint \"src/**/*.ts\"",
     "format": "prettier --write \"src/**/*.ts\"",
     "predeploy": "npm run build",
-    "deploy": "vite build && gh-pages -d dist",
+    "deploy": "gh-pages -d dist",
     "prepare": "husky"
   },
   "keywords": [],
