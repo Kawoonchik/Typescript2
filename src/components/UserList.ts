@@ -2,9 +2,11 @@ import { IUser } from '../models/interfaces/IUser';
 
 export class UserList {
   private containerId: string;
+  private onDelete: (userId: string) => void;
 
-  constructor(containerId: string) {
+  constructor(containerId: string, onDelete: (userId: string) => void) {
     this.containerId = containerId;
+    this.onDelete = onDelete;
   }
 
   render(users: IUser[]): void {
@@ -26,8 +28,17 @@ export class UserList {
 
     users.forEach((user) => {
       const listItem = document.createElement('li');
-      listItem.className = 'list-group-item px-0';
-      listItem.textContent = `${user.name} (${user.email}) - Книг на руках: ${user.borrowedBooks ? user.borrowedBooks.length : 0}`;
+      listItem.className = 'list-group-item d-flex justify-content-between align-items-center px-0';
+
+      const details = document.createElement('span');
+      details.textContent = `${user.name} (${user.email}) - Книг на руках: ${user.borrowedBooks ? user.borrowedBooks.length : 0}`;
+
+      const deleteBtn = document.createElement('button');
+      deleteBtn.className = 'btn btn-danger btn-sm';
+      deleteBtn.textContent = 'Видалити';
+      deleteBtn.addEventListener('click', () => this.onDelete(user.id));
+
+      listItem.append(details, deleteBtn);
       listGroup.appendChild(listItem);
     });
 

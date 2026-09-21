@@ -24,7 +24,21 @@ document.addEventListener('DOMContentLoaded', () => {
   const bookLibrary = new Library<IBook>(savedBooks);
   const userLibrary = new Library<IUser>(savedUsers);
 
-  const userList = new UserList('user-list-container');
+  const userList = new UserList('user-list-container', (userId: string) => {
+    const user = userLibrary.findById(userId);
+    if (!user) return;
+
+    user.borrowedBooks.forEach((bookId) => {
+      const book = bookLibrary.findById(bookId);
+      if (book) book.isBorrowed = false;
+    });
+    userLibrary.remove(userId);
+    Storage.save(BOOKS_STORAGE_KEY, bookLibrary.getAll());
+    Storage.save(USERS_STORAGE_KEY, userLibrary.getAll());
+    bookList.render(bookLibrary.getAll());
+    userList.render(userLibrary.getAll());
+    NotificationService.show(`Користувача "${user.name}" видалено`);
+  });
 
   const bookList = new BookList(
     'book-list-container',
@@ -66,6 +80,20 @@ document.addEventListener('DOMContentLoaded', () => {
         userList.render(userLibrary.getAll());
         NotificationService.show(`Книгу "${book.title}" успішно повернуто`);
       }
+    },
+    (bookId: string) => {
+      const book = bookLibrary.findById(bookId);
+      if (!book) return;
+
+      userLibrary.getAll().forEach((user) => {
+        user.borrowedBooks = user.borrowedBooks.filter((id: string) => id !== bookId);
+      });
+      bookLibrary.remove(bookId);
+      Storage.save(BOOKS_STORAGE_KEY, bookLibrary.getAll());
+      Storage.save(USERS_STORAGE_KEY, userLibrary.getAll());
+      bookList.render(bookLibrary.getAll());
+      userList.render(userLibrary.getAll());
+      NotificationService.show(`Книгу "${book.title}" видалено`);
     },
   );
 
