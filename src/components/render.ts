@@ -17,7 +17,6 @@ export function renderAppLayout(): void {
   const bookListContainer = createSectionContainer('book-list-container');
   const userListContainer = createSectionContainer('user-list-container');
 
-  // Монтуємо все в DOM
   container.append(
     header,
     bookFormContainer,
@@ -29,7 +28,6 @@ export function renderAppLayout(): void {
   appContainer.appendChild(container);
 }
 
-// Допоміжна функція для створення блоків-карток
 function createSectionContainer(id: string): HTMLDivElement {
   const wrapper = document.createElement('div');
   wrapper.className = 'card mb-3 shadow-sm';

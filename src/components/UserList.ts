@@ -27,7 +27,6 @@ export class UserList {
     users.forEach((user) => {
       const listItem = document.createElement('li');
       listItem.className = 'list-group-item px-0';
-      // Показуємо ім'я, email і скільки книг зараз на руках
       listItem.textContent = `${user.name} (${user.email}) - Книг на руках: ${user.borrowedBooks ? user.borrowedBooks.length : 0}`;
       listGroup.appendChild(listItem);
     });
