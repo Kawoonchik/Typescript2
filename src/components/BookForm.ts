@@ -41,7 +41,6 @@ export class BookForm {
 
       let isValid = true;
 
-    
       if (!Validation.isRequired(titleVal)) {
         this.showError(title.wrapper, "Це поле є обов'язковим");
         isValid = false;
@@ -75,7 +74,7 @@ export class BookForm {
     input.id = id;
 
     wrapper.appendChild(input);
-    return { wrapper, input }; 
+    return { wrapper, input };
   }
 
   private showError(wrapper: HTMLDivElement, message: string) {

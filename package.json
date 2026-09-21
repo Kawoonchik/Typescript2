@@ -12,7 +12,8 @@
     "build": "vite build",
     "preview": "vite preview",
     "test": "mocha --require tsx \"tests/**/*.test.ts\"",
-    "lint": "eslint src//*.ts",
+    "lint": "eslint \"src/**/*.ts\"",
+    "format": "prettier --write \"src/**/*.ts\"",
     "deploy": "vite build && gh-pages -d dist",
     "prepare": "husky"
   },
